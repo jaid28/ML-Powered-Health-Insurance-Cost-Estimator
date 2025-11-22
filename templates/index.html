@@ -276,8 +276,8 @@
 
             } catch (error) {
                 console.error('Error:', error);
-                document.getElementById('errorMessage').textContent = 
-                    'Unable to connect to the server. Please make sure the backend is running on port 5000.';
+                document.getElementById('errorMessage').textContent =
+                    'Prediction failed. Please try again or contact support.';
                 errorCard.classList.remove('hidden');
             } finally {
                 // Reset button state
