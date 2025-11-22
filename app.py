@@ -232,7 +232,7 @@ def reset_password():
 
 # existing predict route (now protected)
 @app.route('/predict', methods=['POST'])
-# @login_required
+@login_required
 def predict():
     try:
         data = request.get_json(force=True)
@@ -270,4 +270,5 @@ def predict():
 
 # if __name__ == '__main__':
 #     app.run(debug=True, port=5000)
+
 
