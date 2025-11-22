@@ -23,7 +23,7 @@ otp_storage = {}
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.getenv("SECRET_KEY", "jaid28-super-secret-2025")
+app.secret_key = os.getenv('SECRET_KEY')
 CORS(app)
 bcrypt = Bcrypt(app)
 
@@ -264,39 +264,5 @@ def predict():
     except Exception as e:
         return jsonify({'error': str(e), 'status': 'error'}), 400
 
-@app.route('/admin-Jayd')
-@login_required
-def admin_users():
-    
-    conn = sqlite3.connect('users.db')
-    c = conn.cursor()
-    c.execute("SELECT id, username, email, created_at FROM users ORDER BY created_at DESC")
-    all_users = c.fetchall()
-    conn.close()
-    
-    html = """
-    <h1 style="text-align:center; color:#1e40af; font-family:Arial">All Registered Users (Only You Can See This)</h1>
-    <table border="1" style="width:90%; margin:30px auto; border-collapse:collapse; font-family:Arial">
-        <tr style="background:#3b82f6; color:white">
-            <th style="padding:15px">ID</th>
-            <th style="padding:15px">Username</th>
-            <th style="padding:15px">Email</th>
-            <th style="padding:15px">Registered On</th>
-        </tr>
-    """
-    for user in all_users:
-        html += f"""
-        <tr style="text-align:center">
-            <td style="padding:10px">{user[0]}</td>
-            <td style="padding:10px">{user[1]}</td>
-            <td style="padding:10px">{user[2]}</td>
-            <td style="padding:10px">{user[3]}</td>
-        </tr>
-        """
-    html += "</table>"
-    html += '<p style="text-align:center"><a href="/">Back to Predictor</a></p>'
-    return html
-
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
-
