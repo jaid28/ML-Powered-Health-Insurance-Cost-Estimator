@@ -256,14 +256,17 @@ def predict():
 
         prediction = model.predict(input_data)[0]
 
-        return jsonify({
+        response = jsonify({
             'prediction': round(float(prediction), 2),
             'status': 'success'
         })
+        response.headers.add('Access-Control-Allow-Origin', '*')  # ← THIS LINE FIXES IT
+        return response
 
     except Exception as e:
-        return jsonify({'error': str(e), 'status': 'error'}), 400
+        response = jsonify({'error': str(e), 'status': 'error'})
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response, 400
 
 # if __name__ == '__main__':
 #     app.run(debug=True, port=5000)
-
