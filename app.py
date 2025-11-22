@@ -23,7 +23,7 @@ otp_storage = {}
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY')
+app.secret_key = os.getenv("SECRET_KEY", "jaid28-super-secret-2025")
 CORS(app)
 bcrypt = Bcrypt(app)
 
@@ -299,3 +299,4 @@ def admin_users():
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
+
